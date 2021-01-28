@@ -15,7 +15,8 @@ jobs:
         run: pwd
       - name: Checking folder contents
         run: ls -la
-      - name: Running Go code
+      - name: Linting Go code
         run: |
+          curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.26.0
           cd server/sendmail
-          go run main.go
+          golangci-lint run
