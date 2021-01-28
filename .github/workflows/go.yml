@@ -8,5 +8,5 @@ jobs:
     steps:
       - name: Checking working dir
         run: pwd
-      - name: Lint Go code
-        run: go run main.go
+      - name: Checking folder contents
+        run: ls -la
