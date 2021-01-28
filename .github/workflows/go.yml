@@ -1,4 +1,4 @@
-name: hello world
+name: Lint Go code
 
 on: [push, pull_request]
 
@@ -6,6 +6,11 @@ jobs:
   Lint:
     runs-on: ubuntu-20.04
     steps:
+      - uses: actions/checkout@v2
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.15
       - name: Checking working dir
         run: pwd
       - name: Checking folder contents
