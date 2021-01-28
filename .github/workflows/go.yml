@@ -17,5 +17,7 @@ jobs:
         run: ls -la
       - name: Running Go code
         run: |
-          cd server
+          cd server/sendmail
+          pwd
+          ls -la
           go run main.go
