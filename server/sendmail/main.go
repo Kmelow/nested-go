@@ -1,7 +1,11 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/kmelow/nested-go/server/sendmail/packGreet"
+)
 
 func main() {
-	fmt.Println("Hello")
+	fmt.Println(packGreet.Greet("Shoshanna"))
 }
