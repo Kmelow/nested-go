@@ -16,4 +16,6 @@ jobs:
       - name: Checking folder contents
         run: ls -la
       - name: Running Go code
-        run: go run main.go
+        run: |
+          cd server
+          go run main.go
