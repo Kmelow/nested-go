@@ -18,6 +18,4 @@ jobs:
       - name: Running Go code
         run: |
           cd server/sendmail
-          pwd
-          ls -la
           go run main.go
