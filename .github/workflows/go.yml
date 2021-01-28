@@ -6,5 +6,7 @@ jobs:
   Lint:
     runs-on: ubuntu-20.04
     steps:
+      - name: Checking working dir
+        run: pwd
       - name: Lint Go code
         run: go run main.go
