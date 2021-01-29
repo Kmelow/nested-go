@@ -21,11 +21,13 @@ jobs:
               - 'server/pricing/**/*.go'
             other:
               - 'server/other/**/*.go'
-      - name: Set path
+      - name: Changed sendmail
         if: ${{ steps.filter.outputs.sendmail == 'true' }}
         run: export SERVICE=sendmail
+      - name: Changed pricing
         if: ${{ steps.filter.outputs.pricing == 'true' }}
         run: export SERVICE=pricing
+      - name: Changed other
         if: ${{ steps.filter.outputs.other == 'true' }}
         run: export SERVICE=other
 
