@@ -19,8 +19,8 @@ jobs:
               - 'server/**'
           list-files: json
 
-      - name: Linting Go code
-        run: |
-          curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.26.0
-          cd server/sendmail
-          golangci-lint run
+      # - name: Linting Go code
+      #   run: |
+      #     curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.26.0
+      #     cd server/sendmail
+      #     golangci-lint run
