@@ -11,16 +11,16 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: 1.15
-      - uses: dorny/paths-filter@v2
-        id: changes
-        with:
-          filters: |
-            server:
-              - 'server/**'
-          list-files: shell
-      - name: Printing file changes
+      # - uses: dorny/paths-filter@v2
+      #   id: changes
+      #   with:
+      #     filters: |
+      #       server:
+      #         - 'server/**'
+      #     list-files: shell
+      - name: Trying to fetch changes
         run: |
-          echo ${steps.changes.list-files}
+          echo $(git ls-tree master --name-only)
 
       # - name: Linting Go code
       #   run: |
