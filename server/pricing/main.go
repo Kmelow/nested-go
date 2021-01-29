@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	fmt.Println("Creating agafdin again and again the pricing service")
+	fmt.Println("Creating agfdsafdin again and again the pricing service")
 }
