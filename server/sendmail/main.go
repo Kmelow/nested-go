@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	fmt.Println("Changifdsng again the sendmail service")
+	fmt.Println("Changifdsng fds the sendmail service")
 }
