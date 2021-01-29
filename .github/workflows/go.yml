@@ -11,19 +11,27 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: 1.15
-      # - uses: dorny/paths-filter@v2
-      #   id: changes
-      #   with:
-      #     filters: |
-      #       server:
-      #         - 'server/**'
-      #     list-files: shell
-      - name: Trying to fetch changes
-        run: |
-          echo $(git ls-tree master --name-only)
+      - uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            sendmail:
+              - 'server/sendmail/**/*.go'
+            pricing:
+              - 'server/pricing/**/*.go'
+            other:
+              - 'server/other/**/*.go'
+      - name: Set path
+        if: ${{ steps.filter.outputs.sendmail == 'true' }}
+        run: export SERVICE=sendmail
+        if: ${{ steps.filter.outputs.pricing == 'true' }}
+        run: export SERVICE=pricing
+        if: ${{ steps.filter.outputs.other == 'true' }}
+        run: export SERVICE=other
 
-      # - name: Linting Go code
-      #   run: |
-      #     curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.26.0
-      #     cd server/sendmail
-      #     golangci-lint run
+      - name: Linting Go code
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.26.0
+          cd server/$SERVICE
+          ls
+          golangci-lint run
