@@ -1,8 +1,8 @@
-package packGreet
+package packgreet
 
 import "fmt"
 
 // Greet returns greeting
 func Greet(s string) string {
-	return fmt.Sprintf("Hello %s", s)
+	return fmt.Sprintf("Au revoir.... %s", s)
 }

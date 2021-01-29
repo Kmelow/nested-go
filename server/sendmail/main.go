@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 
-	"github.com/kmelow/nested-go/server/sendmail/packGreet"
+	"github.com/kmelow/nested-go/server/sendmail/packgreet"
 )
 
 func main() {
-	fmt.Println(packGreet.Greet("Shoshanna"))
+	fmt.Println(packgreet.Greet("Shoshanna"))
 }
