@@ -4,5 +4,5 @@ import "fmt"
 
 // Greet returns greeting
 func Greet(s string) string {
-	return fmt.Sprintf("Au revoir.... %s. Now in JSON", s)
+	return fmt.Sprintf("Au revoir.... %s. Now in Shell", s)
 }

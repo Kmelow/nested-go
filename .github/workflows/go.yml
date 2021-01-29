@@ -20,7 +20,7 @@ jobs:
           list-files: shell
       - name: Printing file changes
         run: |
-          for val in ${steps.changes.outputs[@]}; do echo $val; done
+          echo ${steps.changes.outputs}
 
       # - name: Linting Go code
       #   run: |
