@@ -36,5 +36,6 @@ jobs:
         run: ls -la
       - name: Linting Go code
         run: |
+          cd server/$SERVICE
           curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.26.0
           golangci-lint run
