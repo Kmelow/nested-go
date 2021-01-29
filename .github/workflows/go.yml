@@ -30,10 +30,11 @@ jobs:
       - name: Changed other
         if: ${{ steps.filter.outputs.other == 'true' }}
         run: export SERVICE=other
-
+      - name: Changing paths
+        run: cd server/$SERVICE
+      - name: Confirming paths
+        run: ls -la
       - name: Linting Go code
         run: |
           curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.26.0
-          cd server/$SERVICE
-          ls
           golangci-lint run
