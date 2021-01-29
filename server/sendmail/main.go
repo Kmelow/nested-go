@@ -9,6 +9,7 @@ import (
 
 func main() {
 
+	// fdas
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {

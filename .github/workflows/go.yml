@@ -2,41 +2,56 @@ name: Lint Go code
 
 on: [push, pull_request]
 
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  Lint:
+  # The "build" workflow
+  build:
+    # The type of runner that the job will run on
     runs-on: ubuntu-20.04
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - name: Set up Go
+
+      # Setup Go
+      - name: Setup Go
         uses: actions/setup-go@v2
         with:
-          go-version: 1.15
+          go-version: "1.15.0" # The Go version to download (if necessary) and use.
+
       - uses: dorny/paths-filter@v2
         id: changes
         with:
           filters: |
             sendmail:
               - 'server/sendmail/**/*.go'
-            pricing:
-              - 'server/pricing/**/*.go'
             other:
               - 'server/other/**/*.go'
           list-files: shell
       - name: Changed sendmail
         if: ${{ steps.filter.outputs.sendmail == 'true' }}
         run: export SERVICE=sendmail
-      - name: Changed pricing
-        if: ${{ steps.filter.outputs.pricing == 'true' }}
-        run: export SERVICE=pricing
       - name: Changed other
         if: ${{ steps.filter.outputs.other == 'true' }}
         run: export SERVICE=other
-      - name: Changing paths
-        run: cd server/$SERVICE
-      - name: Confirming paths
-        run: ls -la
-      - name: Linting Go code
+
+      # Install all the dependencies
+      - name: Install dependencies
         run: |
-          cd server/$SERVICE
-          curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.26.0
-          golangci-lint run
+          go version
+          go get -u golang.org/x/lint/golint
+
+      # Run build of the application
+      - name: Run build
+        run: go build server/$SERVICE
+
+      # Run vet & lint on the code
+      - name: Run vet & lint
+        run: |
+          go vet server/$SERVICE
+          golint server/$SERVICE
+
+      # # Run testing on the code
+      # - name: Run testing
+      #   run: cd test && go test -v
